@@ -16,12 +16,30 @@ p {
     width:20%;
     display:inline-block;
     height:150px;
+    @media (min-width: 768px) and (max-width: 1024px) {
+        width: 30%;
+    }
+    @media screen and (max-width: 768px) {
+        margin:2.5%;
+        width: 95%;
+    }
+    .month-name {
+        @extend .__font-family;
+        font-size: 35px;
+    }
+    .day-display {
+        @extend .__font-family;
+        font-size: 20px;
+        padding: 10px;
+    }
 }
 
-.day-display {
-    @extend .__font-family;
-    font-size: 20px;
-    padding: 10px;
+.current-day-display {
+    color:red;
+}
+
+.current-day {
+    border:1px solid red;
 }
 
 

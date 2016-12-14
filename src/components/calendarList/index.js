@@ -3,12 +3,33 @@ import React, { Component } from 'react';
 /* components */
 import CalendarDays from './days';
 
+const monthNameMap = (month) => {
+    months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+    ];
+    return monthNames[month - 1];
+}
+
 const dateUtil = {
     currentDate: new Date(),
+    currentDay () {
+        return this.currentDate.getDate();
+    },
     currentMonth() {
         return this.currentDate.getMonth() + 1;
-    },
-    currentYear() {
+    } ,
+    currentYear () {
         return this.currentDate.getFullYear();
     },
     daysInMonth: (month, year) => {
@@ -23,10 +44,15 @@ export default class CalendarView extends Component {
     }
 
     renderCalendarDayBlocks(days) {
-        return [...(new Array(days)).keys()]
+        let isCurrentDay = day => day == dateUtil.currentDay();
+        return [...(new Array(days + 1)).keys()]
             .map(day => 
-                <CalendarDays key={day} day={day} />
-            )
+                <CalendarDays 
+                    currentDay={isCurrentDay(day)}
+                    key={day} 
+                    day={day} 
+                /> 
+            );
     }
 
     render () {
