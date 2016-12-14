@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 
 /* components */
 import CalendarDays from './days';
@@ -45,7 +46,7 @@ export default class CalendarView extends Component {
 
     renderCalendarDayBlocks(days) {
         let isCurrentDay = day => day == dateUtil.currentDay();
-        return [...(new Array(days + 1)).keys()]
+        return _.range(1, days + 1) 
             .map(day => 
                 <CalendarDays 
                     currentDay={isCurrentDay(day)}

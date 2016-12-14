@@ -15,6 +15,9 @@ export default class CalendarDays extends Component {
                 <p className={`day-display ${addClassIfActive('current-day-display')}`}>
                     {this.props.day}
                  </p>
+                <div className="events">
+                    <p className="events-title">20</p>
+                </div>
             </div>
         )
     }
