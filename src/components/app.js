@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import CalendarListDay from '../components/calendarList/days';
+import CalendarView from '../components/calendarList/index';
 
 /* App style imports */
 require('../../styles/application.scss'); 
@@ -12,8 +12,7 @@ export default class App extends Component {
     render () {
         return (
             <div>
-               <p className="para"> starter!</p>
-                <CalendarListDay />
+                <CalendarView />
             </div>
 
         )

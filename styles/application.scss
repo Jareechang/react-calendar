@@ -11,4 +11,11 @@ p {
     @extend .__font-family;
 }
 
+.calendar-block {
+    border: 1px solid gray;
+    width:20%;
+    display:inline-block;
+    height:150px;
+}
+
 
