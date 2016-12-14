@@ -23,11 +23,10 @@ export default class CalendarView extends Component {
     }
 
     renderCalendarDayBlocks(days) {
-        let dayBlocks = [];
-        for (var num = 1; num <= days; num++) {
-            dayBlocks.push(num)
-        }
-        return dayBlocks.map(day => <CalendarDays key={day} day={day} />)
+        return [...(new Array(days)).keys()]
+            .map(day => 
+                <CalendarDays key={day} day={day} />
+            )
     }
 
     render () {

@@ -9,7 +9,9 @@ export default class CalendarDays extends Component {
     render () {
         return (
             <div className="calendar-block">
-                {this.props.day}
+                <p className="day-display">
+                    {this.props.day}
+                 </p>
             </div>
         )
     }

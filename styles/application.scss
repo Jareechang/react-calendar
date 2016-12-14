@@ -12,10 +12,16 @@ p {
 }
 
 .calendar-block {
-    border: 1px solid gray;
+    border: 0.5px solid gray;
     width:20%;
     display:inline-block;
     height:150px;
+}
+
+.day-display {
+    @extend .__font-family;
+    font-size: 20px;
+    padding: 10px;
 }
 
 
