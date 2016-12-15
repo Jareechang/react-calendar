@@ -4,8 +4,8 @@ import _ from 'lodash';
 /* components */
 import CalendarDays from './days';
 
-const monthNameMap = (month) => {
-    months = [
+let monthNameMap = (month) => {
+    const monthNames = [
         'January',
         'February',
         'March',
@@ -36,24 +36,68 @@ const dateUtil = {
     daysInMonth: (month, year) => {
         if(!!! month || !!! year) return "";
         return new Date(year, month, 0).getDate()
+    },
+    isCurrentDay(day) {
+        return  day == this.currentDay();
     }
 }
 
 export default class CalendarView extends Component {
     constructor (props) {
         super(props);
+        this.renderDayBlock = this.renderDayBlock.bind(this);
+    }
+
+    renderDayBlock(day) {
+        const EmptyCalendarDay = () => {
+            return <div className="calendar-block" style={{border: '0px'}}></div>
+        }
+        if (day === " ") {
+            return <EmptyCalendarDay key={Math.random()}/>;
+        }
+        return <CalendarDays 
+            currentDay={dateUtil.isCurrentDay(day)}
+            key={day + Math.random()} 
+            day={day} 
+        />;
     }
 
     renderCalendarDayBlocks(days) {
-        let isCurrentDay = day => day == dateUtil.currentDay();
-        return _.range(1, days + 1) 
-            .map(day => 
-                <CalendarDays 
-                    currentDay={isCurrentDay(day)}
-                    key={day} 
-                    day={day} 
-                /> 
-            );
+        let firstDayInWeekdays = (year, month, day) => {
+            return (new Date(year, month - 1, day)).getDay();
+        };
+        let dayRange = _.range(1, days + 1);
+        const skipsDays = Array(
+            firstDayInWeekdays(
+                dateUtil.currentYear(),
+                dateUtil.currentMonth(),
+                dateUtil.currentDay()
+            )
+        ).fill(" ");
+        return skipsDays            
+            .concat(dayRange)
+            .map(day => this.renderDayBlock(day));
+    }
+
+    renderWeekdays() {
+        const WEEK_DAYS = [
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+            'Sunday'
+        ];
+        return WEEK_DAYS.map(
+            weekday => 
+                <div 
+                    key={weekday} 
+                    className="week-day"
+                >
+                    {weekday}
+                </div>
+        );
     }
 
     render () {
@@ -62,8 +106,18 @@ export default class CalendarView extends Component {
             dateUtil.currentYear()
         );
         return (
-            <div>
-                {this.renderCalendarDayBlocks(numberOfDaysThisMonth)}
+            <div className="row">
+                <div className="container-sm">
+                    <h3>{monthNameMap(dateUtil.currentMonth())} </h3>
+                    <div className="">
+                        {this.renderWeekdays()}
+                    </div>
+                    <div className="clearfix">
+                    <p className="pull-right">next</p>
+                    <p className="pull-left">previous</p>
+                    </div>
+                    {this.renderCalendarDayBlocks(numberOfDaysThisMonth)}
+                </div>
             </div>
         )
     }
