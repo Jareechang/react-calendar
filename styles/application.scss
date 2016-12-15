@@ -1,3 +1,6 @@
+/* @imports */
+@import 'navigation';
+
 .__font-family {
     font-family: 'Roboto', sans-serif;
 }
@@ -13,14 +16,6 @@ p {
 
 .container-sm {
     margin: auto 50px;
-}
-
-.navigation-section {
-    margin-top:25px;
-    .navigate-next, 
-    .navigate-previous {
-        padding: 15px;
-    }
 }
 
 .calendar-block {
