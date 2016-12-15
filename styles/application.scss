@@ -15,9 +15,17 @@ p {
     margin: auto 50px;
 }
 
+.navigation-section {
+    margin-top:25px;
+    .navigate-next, 
+    .navigate-previous {
+        padding: 15px;
+    }
+}
+
 .calendar-block {
-    border: 0.5px solid gray;
-    background: rgba(243, 242, 242, 0.55);
+    border-radius: 7px;
+    background: rgba(243, 74, 74, 0.85);
     margin:10px;
     width:12%;
     display:inline-block;
@@ -26,8 +34,9 @@ p {
         width: 30%;
     }
     @media screen and (max-width: 768px) {
-        margin:7.5%;
-        width: 85%;
+        margin: 20px;
+        display:block;
+        width: 90%;
     }
     .month-name {
         @extend .__font-family;
@@ -35,6 +44,7 @@ p {
     }
     .day-display {
         @extend .__font-family;
+        color: #fff;
         font-size: 25px;
         padding: 5px;
         padding-left: 20px;
@@ -49,18 +59,32 @@ p {
     .events
     .events-title {
         @extend .__font-family;
-        padding:15px;
-        font-size:16px;
+        font-size:20px;
     }
+
 }
 
+.calendar-block
+.today-text {
+    @extend .__font-family;
+    font-size: 15px;
+    padding: 5px;
+    padding-left: 15px;
+    text-align: left;
+    font-weight:bold;
+}
+
+.calendar-block
 .current-day-display {
-    color:#17925f;
+    color: #000;
 }
 
 .current-day {
-    background:rgba(209, 236, 216, 0.65);
-    border:2px solid #17925f;
+    background: rgba(209, 236, 216, 0.65);
+    border: 3px solid rgba(209, 236, 216, 0.65);
+    .events {
+        padding: 40px;
+    }
 }
 
 .week-day {

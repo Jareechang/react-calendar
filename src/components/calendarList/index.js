@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 /* components */
 import CalendarDays from './days';
+import NavigationSection from '../../components/navigation/index';
 
 let monthNameMap = (month) => {
     const monthNames = [
@@ -106,18 +107,13 @@ export default class CalendarView extends Component {
             dateUtil.currentYear()
         );
         return (
-            <div className="row">
-                <div className="container-sm">
-                    <h3>{monthNameMap(dateUtil.currentMonth())} </h3>
-                    <div className="">
-                        {this.renderWeekdays()}
-                    </div>
-                    <div className="clearfix">
-                    <p className="pull-right">next</p>
-                    <p className="pull-left">previous</p>
-                    </div>
-                    {this.renderCalendarDayBlocks(numberOfDaysThisMonth)}
+            <div>
+                <NavigationSection />
+                <h3>{monthNameMap(dateUtil.currentMonth())} </h3>
+                <div className="">
+                    {this.renderWeekdays()}
                 </div>
+                {this.renderCalendarDayBlocks(numberOfDaysThisMonth)}
             </div>
         )
     }
