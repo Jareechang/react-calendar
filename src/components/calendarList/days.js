@@ -6,9 +6,7 @@ export default class CalendarDays extends Component {
     }
 
     render () {
-        let addClassIfActive = (name) => {
-            return this.props.currentDay ? name : '';
-        };
+        let addClassIfActive = (name) => this.props.currentDay ? name : '';
         return (
             <div className={`calendar-block ${addClassIfActive('current-day')}`}>
                 <p className="today-text">
@@ -19,7 +17,7 @@ export default class CalendarDays extends Component {
                  </p>
                 <div className="events">
                     <p className="events-title">20</p>
-                    <p className="events-body text-right">events</p>
+                    <p className="events-body">events</p>
                 </div>
             </div>
         )

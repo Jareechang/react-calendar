@@ -13,6 +13,6 @@ const NavigationSection = (props) => {
             </p>
         </div>
     )
-}
+};
 
 export default NavigationSection;

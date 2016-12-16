@@ -1,11 +1,18 @@
+$btn-active: #e4e4e4;
+$btn-border: #eaeaea;
+
 .navigation-section {
     margin-top: 25px;
     .navigation-btn {
-        border: 1px solid #000;
+        border: 1px solid $btn-border;
         padding: 10px;
         padding-right: 25px;
         padding-left: 25px;
         border-radius: 50px;
+        &:hover {
+            background: $btn-active;
+            cursor: pointer;
+        }
     }
     .glyph-left-pad-10 {
         padding-left: 10px;
