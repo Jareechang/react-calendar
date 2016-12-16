@@ -1,5 +1,7 @@
 import { MONTH_NAMES } from '../constants/date_constants';
 
+import moment from 'moment';
+
 const monthNameMap = (month) => {
     return MONTH_NAMES[month - 1];
 }
@@ -29,9 +31,12 @@ const dateUtil = {
      * @default Arguments - {d = 1, m = currentMonth, yyyy = currentYear} 
      * */
     daysToSkip ({ d = 1, m = this.currentMonth(), yyyy = this.currentYear() }) {
-        console.log('month ', m)
-        let firstDayInWeekdays = (year, month, day) => (new Date(year, month - 1, day)).getDay() - 1;
-        console.log(firstDayInWeekdays(yyyy, m, d));
+        let firstDayInWeekdays = (year, month, day) => {
+            let daysToSkip = moment(`${yyyy}-${m}-${d}`).day();
+            if (daysToSkip == 0) return daysToSkip;
+            return daysToSkip - 1;
+        };
+
         return Array(
             firstDayInWeekdays(yyyy, m, d)
         ).fill(" ");

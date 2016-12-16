@@ -1,6 +1,8 @@
+import moment from 'moment';
+
 const DateTracker = (function(eventMiddleWare) {
 
-    let _currentDate = new Date();
+    let _currentDate = moment();
 
     let _eventMiddleWare = eventMiddleWare || {};
 
@@ -11,23 +13,17 @@ const DateTracker = (function(eventMiddleWare) {
     }
 
     function _resetToNextYear () {
-        _currentDate.setYear(_currentDate.getFullYear() + 1);
-        _currentDate.setMonth(1);
+        _currentDate.add(1, 'years');
     }
 
     function _resetToLastYear () {
-        _currentDate.setYear(_currentDate.getFullYear() - 1);
-        _currentDate.setMonth(11, 31);
+        _currentDate.subtract(1, 'years');
     }
 
     function increment() {
         const NOVEMBER = 11; // offset from date
 
-        if (_currentDate.getMonth() == NOVEMBER) {
-            _resetToNextYear();
-        } else {
-            _currentDate.setMonth(_currentDate.getMonth() + 1);
-        }
+        _currentDate.add(1, 'months');
 
         _eventMiddleWare.publish('INCREMENT_DATE', _currentDate);
     }
@@ -35,10 +31,10 @@ const DateTracker = (function(eventMiddleWare) {
     function decrement() {
         const JANUARY = 1; // offset from date
 
-        if (_currentDate.getMonth() == JANUARY) {
+        if (_currentDate.month() == JANUARY) {
             _resetToLastYear();
         } else {
-            _currentDate.setMonth(_currentDate.getMonth() - 1);
+            _currentDate.subtract(1, 'months');
         }
 
         _eventMiddleWare.publish('DECREMENT_DATE', _currentDate);

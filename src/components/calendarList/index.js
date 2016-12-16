@@ -33,8 +33,9 @@ export default class CalendarView extends Component {
     }
 
     updateState(updatedDate) {
-        let month = updatedDate.getMonth();
-        let year = updatedDate.getFullYear();
+        let month = updatedDate.month() + 1;
+        let year = updatedDate.year();
+
         this.setState({ 
             month: month,
             year: year,
