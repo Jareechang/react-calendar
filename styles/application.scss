@@ -44,11 +44,12 @@ p {
     .day-display {
         @extend .__font-family;
         color: #fff;
-        font-size: 25px;
+        font-size: 16px;
         padding: 5px;
     }
 
     .events {
+        color: rgba(76, 70, 70, 0.66);
         padding:25px;
         background: #FFF;
         border: 1px solid #efefef;
@@ -60,10 +61,14 @@ p {
 
     .events
     .events-title {
+        color: rgba(76, 70, 70, 0.65);
         @extend .__font-family;
-        font-size:20px;
+        font-size: 20px;
     }
+}
 
+.weekend {
+    background: rgba(195, 56, 56, 0.85);
 }
 
 .calendar-block

@@ -5,7 +5,7 @@ import _ from 'lodash';
 import CalendarDays from './days';
 
 let monthNameMap = (month) => {
-    const monthNames = [
+    const MONTH_NAMES = [
         'January',
         'February',
         'March',
@@ -19,7 +19,7 @@ let monthNameMap = (month) => {
         'November',
         'December'
     ];
-    return monthNames[month - 1];
+    return MONTH_NAMES[month - 1];
 }
 
 const dateUtil = {
@@ -40,14 +40,10 @@ const dateUtil = {
     isCurrentDay (day) {
         return  day == this.currentDay();
     },
-    daysToSkip () {
+    daysToSkip (d = this.currentDay(), m = this.currentMonth(), yyyy = this.currentYear()) {
         let firstDayInWeekdays = (year, month, day) => (new Date(year, month - 1, day)).getDay();
         return Array(
-            firstDayInWeekdays(
-                this.currentYear(),
-                this.currentMonth(),
-                this.currentDay()
-            )
+            firstDayInWeekdays(yyyy, m, d)
         ).fill(" ");
     }
 }
@@ -58,7 +54,7 @@ export default class CalendarView extends Component {
         this.renderDayBlock = this.renderDayBlock.bind(this);
     }
 
-    renderDayBlock(day) {
+    renderDayBlock(day, i) {
 
         if (day === " ") {
             let EmptyCalendarDay = _ =>
@@ -92,10 +88,7 @@ export default class CalendarView extends Component {
         ];
         return WEEK_DAYS.map(
             weekday => 
-                <div 
-                    key={weekday} 
-                    className="week-day"
-                >
+                <div key={weekday} className="week-day">
                     {weekday}
                 </div>
         );
