@@ -8,23 +8,22 @@ export default class CalendarDays extends Component {
     }
 
     render () {
-        let addClassIfActive = (name) => {
-            if (this.props.currentDay && 
-                this.props.year == dateUtil.currentYear()) {
-                    return name;
-                } 
-            return '';
-        }
-
-        let addClassForWeekend = (name) => this.props.isWeekend ? name : '';
-        let appendAdditionalClass = () => {
-            return addClassIfActive('current-day') + 
-                addClassForWeekend('weekend');
+        let isCurrentMonthAndYear = () => {
+            return this.props.year == dateUtil.currentYear() &&
+                this.props.month == dateUtil.currentMonth();
         };
+
+        let addClassIfActive = (name) => {
+            if (this.props.currentDay && isCurrentMonthAndYear()) {
+                    return name;
+            } 
+            return '';
+        };
+
         return (
-            <div className={`calendar-block ${appendAdditionalClass()}`}>
+            <div className={`calendar-block ${addClassIfActive('current-day')}`}>
                 <p className="today-text">
-                    {this.props.currentDay ? 'Today' : ''}
+                    {this.props.currentDay && isCurrentMonthAndYear() ? 'Today' : ''}
                 </p>
                 <p className={`day-display ${addClassIfActive('current-day-display')}`}>
                     {this.props.day || " "}

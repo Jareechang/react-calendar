@@ -57,6 +57,7 @@ export default class CalendarView extends Component {
             currentDay={dateUtil.isCurrentDay(day)}
             key={day + Math.random()} 
             year={this.state.year}
+            month={this.state.month}
             day={day} 
         />;
     }
