@@ -46,7 +46,7 @@ export default class CalendarView extends Component {
         });
     }
 
-    renderDayBlock(day, i) {
+    renderDayBlock(day) {
         if (day === " ") {
             let EmptyCalendarDay = _ =>
                 <div className="calendar-block" style={{border: '0px'}}></div>;
@@ -56,6 +56,7 @@ export default class CalendarView extends Component {
         return <CalendarDays 
             currentDay={dateUtil.isCurrentDay(day)}
             key={day + Math.random()} 
+            year={this.state.year}
             day={day} 
         />;
     }

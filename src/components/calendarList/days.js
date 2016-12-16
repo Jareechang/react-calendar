@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 
+import { dateUtil } from '../../utils/dateUtil';
+
 export default class CalendarDays extends Component {
     constructor (props) {
         super(props);
     }
 
     render () {
-        let addClassIfActive = (name) => this.props.currentDay ? name : '';
+        let addClassIfActive = (name) => {
+            if (this.props.currentDay && 
+                this.props.year == dateUtil.currentYear()) {
+                    return name;
+                } 
+            return '';
+        }
+
         let addClassForWeekend = (name) => this.props.isWeekend ? name : '';
         let appendAdditionalClass = () => {
             return addClassIfActive('current-day') + 
