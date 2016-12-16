@@ -29,7 +29,9 @@ const dateUtil = {
      * @default Arguments - {d = 1, m = currentMonth, yyyy = currentYear} 
      * */
     daysToSkip ({ d = 1, m = this.currentMonth(), yyyy = this.currentYear() }) {
+        console.log('month ', m)
         let firstDayInWeekdays = (year, month, day) => (new Date(year, month - 1, day)).getDay() - 1;
+        console.log(firstDayInWeekdays(yyyy, m, d));
         return Array(
             firstDayInWeekdays(yyyy, m, d)
         ).fill(" ");

@@ -14,11 +14,38 @@ export default class CalendarView extends Component {
 
     constructor (props) {
         super(props);
+
+        /* Event registrations */
+        props.event.subscribe('INCREMENT_DATE', data => this.updateState(data));
+        props.event.subscribe('DECREMENT_DATE', data => this.updateState(data));
+
         this.renderDayBlock = this.renderDayBlock.bind(this);
+        const month = dateUtil.currentMonth();
+        const year = dateUtil.currentYear();
+        this.state = {
+            month: month,
+            year: year,
+            numberOfDaysThisMonth: dateUtil.daysInMonth(
+                month,
+                year
+            )
+        }
+    }
+
+    updateState(updatedDate) {
+        let month = updatedDate.getMonth();
+        let year = updatedDate.getFullYear();
+        this.setState({ 
+            month: month,
+            year: year,
+            numberOfDaysThisMonth: dateUtil.daysInMonth(
+                month,
+                year 
+            )
+        });
     }
 
     renderDayBlock(day, i) {
-
         if (day === " ") {
             let EmptyCalendarDay = _ =>
                 <div className="calendar-block" style={{border: '0px'}}></div>;
@@ -34,7 +61,7 @@ export default class CalendarView extends Component {
 
     renderCalendarDayBlocks(days) {
         let dayRange = _.range(1, days + 1);
-        return dateUtil.daysToSkip({ m: 4 })            
+        return dateUtil.daysToSkip({ m: this.state.month, yyyy: this.state.year })            
                 .concat(dayRange)
                 .map(day => this.renderDayBlock(day));
     }
@@ -49,18 +76,13 @@ export default class CalendarView extends Component {
     }
 
     render () {
-        const numberOfDaysThisMonth = dateUtil.daysInMonth(
-            dateUtil.currentMonth(),
-            dateUtil.currentYear()
-        );
-
         return (
             <div className="text-center">
                 <div className="title-section">
-                    <p className="month-name">{monthNameMap(dateUtil.currentMonth())}</p>
+                    <p className="month-name">{monthNameMap(this.state.month) + ' ' + this.state.year}</p>
                 </div>
                 <div>{this.renderWeekdays()}</div>
-                {this.renderCalendarDayBlocks(numberOfDaysThisMonth)}
+                {this.renderCalendarDayBlocks(this.state.numberOfDaysThisMonth)}
             </div>
         );
     }

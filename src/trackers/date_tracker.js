@@ -10,14 +10,38 @@ const DateTracker = (function(eventMiddleWare) {
         return _currentDate.toString();
     }
 
+    function _resetToNextYear () {
+        _currentDate.setYear(_currentDate.getFullYear() + 1);
+        _currentDate.setMonth(1);
+    }
+
+    function _resetToLastYear () {
+        _currentDate.setYear(_currentDate.getFullYear() - 1);
+        _currentDate.setMonth(11, 31);
+    }
+
     function increment() {
-        _currentDate.setMonth(_currentDate.getMonth() + 1);
-        _eventMiddleWare.publish('INCREMENT_DATE');
+        const NOVEMBER = 11; // offset from date
+
+        if (_currentDate.getMonth() == NOVEMBER) {
+            _resetToNextYear();
+        } else {
+            _currentDate.setMonth(_currentDate.getMonth() + 1);
+        }
+
+        _eventMiddleWare.publish('INCREMENT_DATE', _currentDate);
     }
 
     function decrement() {
-        _currentDate.setMonth(_currentDate.getMonth() - 1);
-        _eventMiddleWare.publish('DECREMENT_DATE');
+        const JANUARY = 1; // offset from date
+
+        if (_currentDate.getMonth() == JANUARY) {
+            _resetToLastYear();
+        } else {
+            _currentDate.setMonth(_currentDate.getMonth() - 1);
+        }
+
+        _eventMiddleWare.publish('DECREMENT_DATE', _currentDate);
     }
 
     return {

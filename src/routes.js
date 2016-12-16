@@ -8,23 +8,19 @@ import CalendarView from './components/calendarList/index';
 import NavigationSection from './components/navigation/index';
 
 const EventMiddleWare = (props) => {
+    let events = {};
     /* public methods */
-    let publicMethods = {
-        date: new Date(),
-        incrementMonth() {
-            return this.date.setMonth(this.date.getMonth() + 1);
-        },
-        decrementMonth() {
-            return this.date.setMonth(this.date.getMonth() - 1);
-        }
+    let publicMethods = {}
+
+    publicMethods.publish = function(message, data) {
+        let action = events[message] || null;
+        if (!action) return;
+
+        action(data);
     }
 
-    publicMethods.publish = function(message, type = 1) {
-        console.log(message);
-        console.log(type);
-    }
-
-    publicMethods.subscribe = function() {
+    publicMethods.subscribe = function(message, fn) {
+        events[message] = fn;
     }
 
     publicMethods.reducer = function() {
