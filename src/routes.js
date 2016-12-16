@@ -6,12 +6,41 @@ import CalendarDetails from './components/calendarDetails/index';
 import CalendarView from './components/calendarList/index';
 import NavigationSection from './components/navigation/index';
 
+const EventMiddleWare = (props) => {
+    /* public methods */
+    let publicMethods = {
+        date: new Date(),
+        incrementMonth() {
+            return this.date.setMonth(this.date.getMonth() + 1);
+        },
+        decrementMonth() {
+            return this.date.setMonth(this.date.getMonth() - 1);
+        }
+    }
+
+    publicMethods.publish = function() {
+    }
+
+    publicMethods.subscribe = function() {
+    }
+
+    publicMethods.reducer = function() {
+    }
+
+    /* Attach interface onto child components */
+    const childrenWithProps = React.Children.map(props.children,
+        (child) => React.cloneElement(child, publicMethods)
+    );
+
+    return (<div>{childrenWithProps}</div>);
+}
+
 const Home = () => {
     return (
-        <div>
+        <EventMiddleWare>
             <NavigationSection />
             <CalendarView />
-        </div>
+        </EventMiddleWare>
     );
 };
 

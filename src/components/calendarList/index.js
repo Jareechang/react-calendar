@@ -40,8 +40,14 @@ const dateUtil = {
     isCurrentDay (day) {
         return  day == this.currentDay();
     },
-    daysToSkip (d = this.currentDay(), m = this.currentMonth(), yyyy = this.currentYear()) {
-        let firstDayInWeekdays = (year, month, day) => (new Date(year, month - 1, day)).getDay();
+    /** 
+     * @param Object - Date Object { d: Integer, m: Integer, yyyy: Integer } 
+     * @default Arguments - {d = 1, m = currentMonth, yyyy = currentYear} 
+     * @return Array - array of blanks to skip to right weekday for that month
+     * */
+    daysToSkip ({ d = 1, m = this.currentMonth(), yyyy = this.currentYear() }) {
+        let firstDayInWeekdays = (year, month, day) => (new Date(year, month - 1, day)).getDay() - 1;
+
         return Array(
             firstDayInWeekdays(yyyy, m, d)
         ).fill(" ");
@@ -49,6 +55,7 @@ const dateUtil = {
 }
 
 export default class CalendarView extends Component {
+
     constructor (props) {
         super(props);
         this.renderDayBlock = this.renderDayBlock.bind(this);
@@ -71,7 +78,7 @@ export default class CalendarView extends Component {
 
     renderCalendarDayBlocks(days) {
         let dayRange = _.range(1, days + 1);
-        return dateUtil.daysToSkip()            
+        return dateUtil.daysToSkip({ m: 4 })            
                 .concat(dayRange)
                 .map(day => this.renderDayBlock(day));
     }
