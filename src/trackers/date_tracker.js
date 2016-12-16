@@ -11,13 +11,11 @@ const DateTracker = (function(eventMiddleWare) {
     }
 
     function increment() {
-        const NOVEMBER = 11; // offset from date
         _currentDate.add(1, 'months');
         _eventMiddleWare.publish('INCREMENT_DATE', _currentDate);
     }
 
     function decrement() {
-        const JANUARY = 1; // offset from date
         _currentDate.subtract(1, 'months');
         _eventMiddleWare.publish('DECREMENT_DATE', _currentDate);
     }
