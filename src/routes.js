@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import { Route, IndexRoute } from 'react-router';
 
 import App from './components/app';
@@ -18,7 +19,9 @@ const EventMiddleWare = (props) => {
         }
     }
 
-    publicMethods.publish = function() {
+    publicMethods.publish = function(message, type = 1) {
+        console.log(message);
+        console.log(type);
     }
 
     publicMethods.subscribe = function() {
@@ -29,11 +32,11 @@ const EventMiddleWare = (props) => {
 
     /* Attach interface onto child components */
     const childrenWithProps = React.Children.map(props.children,
-        (child) => React.cloneElement(child, publicMethods)
+        (child) => React.cloneElement(child, { event: publicMethods})
     );
 
     return (<div>{childrenWithProps}</div>);
-}
+};
 
 const Home = () => {
     return (

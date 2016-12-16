@@ -25,6 +25,6 @@ export default class CalendarDays extends Component {
                     <p className="events-body">events</p>
                 </div>
             </div>
-        )
+        );
     }
 }

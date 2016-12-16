@@ -1,58 +1,14 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
-/* components */
+/* Constants */
+import { WEEK_DAYS } from '../../constants/date_constants';
+
+/* Utility */
+import { monthNameMap, dateUtil } from '../../utils/dateUtil';
+
+/* Components */
 import CalendarDays from './days';
-
-let monthNameMap = (month) => {
-    const MONTH_NAMES = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-    ];
-    return MONTH_NAMES[month - 1];
-}
-
-const dateUtil = {
-    currentDate: new Date(),
-    currentDay () {
-        return this.currentDate.getDate();
-    },
-    currentMonth () {
-        return this.currentDate.getMonth() + 1;
-    } ,
-    currentYear () {
-        return this.currentDate.getFullYear();
-    },
-    daysInMonth (month, year){
-        if(!!! month || !!! year) return "";
-        return new Date(year, month, 0).getDate();
-    },
-    isCurrentDay (day) {
-        return  day == this.currentDay();
-    },
-    /** 
-     * @param Object - Date Object { d: Integer, m: Integer, yyyy: Integer } 
-     * @default Arguments - {d = 1, m = currentMonth, yyyy = currentYear} 
-     * @return Array - array of blanks to skip to right weekday for that month
-     * */
-    daysToSkip ({ d = 1, m = this.currentMonth(), yyyy = this.currentYear() }) {
-        let firstDayInWeekdays = (year, month, day) => (new Date(year, month - 1, day)).getDay() - 1;
-
-        return Array(
-            firstDayInWeekdays(yyyy, m, d)
-        ).fill(" ");
-    }
-}
 
 export default class CalendarView extends Component {
 
@@ -84,15 +40,6 @@ export default class CalendarView extends Component {
     }
 
     renderWeekdays() {
-        const WEEK_DAYS = [
-            'Monday',
-            'Tuesday',
-            'Wednesday',
-            'Thursday',
-            'Friday',
-            'Saturday',
-            'Sunday'
-        ];
         return WEEK_DAYS.map(
             weekday => 
                 <div key={weekday} className="week-day">
