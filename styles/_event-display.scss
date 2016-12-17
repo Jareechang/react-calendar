@@ -1,0 +1,32 @@
+.__font-family {
+    font-family: 'Roboto', sans-serif;
+}
+
+.event-display {
+    @extend .__font-family;
+    margin: 25px auto;
+    height: 500px;
+    .event-item {
+        padding: 25px;
+    }
+
+    .event-item {
+
+        ._event-type-general {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
+
+        .event-type-meeting {
+            @extend ._event-type-general;
+            background: #1010a9;
+        }
+
+        .event-type-appointment {
+            @extend ._event-type-general;
+            background: #ea2003;
+        }
+
+    }
+}

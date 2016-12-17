@@ -28,7 +28,7 @@ const EventMiddleWare = (props) => {
 
     /* Attach interface onto child components */
     const childrenWithProps = React.Children.map(props.children,
-        (child) => React.cloneElement(child, { event: publicMethods})
+        (child) => React.cloneElement(child, { event: publicMethods })
     );
 
     return (<div>{childrenWithProps}</div>);

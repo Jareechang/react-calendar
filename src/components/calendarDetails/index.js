@@ -1,18 +1,25 @@
 import React from 'react';
 
+import EventDisplay from './eventDisplay';
+
 const CalendarDetails = (props) => {
     const parseDate = string => {
-        let matchedDate = string.match(/(\d{2})\-(\d)\-(\d{4})/);
+        let matchedDate = string.match(/(\d{4})\-(\d{2})\-(\d)/);
         if (!matchedDate) return {};
         return {
-            month: matchedDate[1],
-            day: matchedDate[2],
-            year: matchedDate[3]
+            year: matchedDate[1],
+            month: matchedDate[2],
+            day: matchedDate[3]
         }
     } 
     return (
         <div>
-            details goes here
+            <div className="col-md-8">
+                <EventDisplay />
+            </div>
+            <div className="col-md-4">
+                panel
+            </div>
         </div>
     );
 };

@@ -4,9 +4,11 @@ import React, { Component } from 'react';
 require('../../styles/application.scss'); 
 
 export default class App extends Component {
+
     constructor (props) {
         super(props);
     }
+
     render () {
         return (
             <div className="row">
@@ -14,7 +16,6 @@ export default class App extends Component {
                     {this.props.children}
                 </div>
             </div>
-        )
-
+        );
     }
-}
+};

@@ -26,4 +26,4 @@ const WEEK_DAYS = [
 export {
     MONTH_NAMES,
     WEEK_DAYS
-}
+};

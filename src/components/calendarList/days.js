@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 
 import { dateUtil } from '../../utils/dateUtil';
 
+import { Link } from 'react-router';
+
 export default class CalendarDays extends Component {
+
     constructor (props) {
         super(props);
     }
@@ -20,18 +23,24 @@ export default class CalendarDays extends Component {
             return '';
         };
 
+        const stringifyDate = () => {
+            return `${this.props.year}-${this.props.month}-${this.props.day}` ;
+        };
+
         return (
             <div className={`calendar-block ${addClassIfActive('current-day')}`}>
-                <p className="today-text">
-                    {this.props.currentDay && isCurrentMonthAndYear() ? 'Today' : ''}
-                </p>
-                <p className={`day-display ${addClassIfActive('current-day-display')}`}>
-                    {this.props.day || " "}
-                 </p>
-                <div className="events">
-                    <p className="events-title">20</p>
-                    <p className="events-body">events</p>
-                </div>
+                <Link to={`/details/${stringifyDate()}`} className="no-style-link">
+                    <p className="today-text no-style-link">
+                        {this.props.currentDay && isCurrentMonthAndYear() ? 'Today' : ''}
+                    </p>
+                    <p className={`day-display ${addClassIfActive('current-day-display')}`}>
+                        {this.props.day || " "}
+                     </p>
+                    <div className="events">
+                        <p className="events-title">20</p>
+                        <p className="events-body">events</p>
+                    </div>
+                </Link>
             </div>
         );
     }

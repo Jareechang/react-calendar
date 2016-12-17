@@ -24,7 +24,7 @@ const NavigationSection = (props) => {
                 Previous
             </p>
         </div>
-    )
+    );
 };
 
 export default NavigationSection;

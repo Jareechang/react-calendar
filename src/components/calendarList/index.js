@@ -14,14 +14,13 @@ export default class CalendarView extends Component {
 
     constructor (props) {
         super(props);
+        const month = dateUtil.currentMonth();
+        const year = dateUtil.currentYear();
 
         /* Event registrations */
         props.event.subscribe('INCREMENT_DATE', data => this.updateState(data));
         props.event.subscribe('DECREMENT_DATE', data => this.updateState(data));
 
-        this.renderDayBlock = this.renderDayBlock.bind(this);
-        const month = dateUtil.currentMonth();
-        const year = dateUtil.currentYear();
         this.state = {
             month: month,
             year: year,
@@ -30,6 +29,7 @@ export default class CalendarView extends Component {
                 year
             )
         }
+        this.renderDayBlock = this.renderDayBlock.bind(this);
     }
 
     updateState(updatedDate) {
@@ -53,13 +53,15 @@ export default class CalendarView extends Component {
             return <EmptyCalendarDay key={Math.random()}/>;
         }
 
-        return <CalendarDays 
-            currentDay={dateUtil.isCurrentDay(day)}
-            key={day + Math.random()} 
-            year={this.state.year}
-            month={this.state.month}
-            day={day} 
-        />;
+        return (
+            <CalendarDays 
+                currentDay={dateUtil.isCurrentDay(day)}
+                key={day + Math.random()} 
+                year={this.state.year}
+                month={this.state.month}
+                day={day} 
+            />
+        );
     }
 
     renderCalendarDayBlocks(days) {

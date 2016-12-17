@@ -1,5 +1,6 @@
 /* @imports */
 @import 'navigation';
+@import 'event-display';
 
 .__font-family {
     font-family: 'Roboto', sans-serif;
@@ -100,3 +101,9 @@ p {
     display: inline-block;
     text-align:center;
 }
+
+.no-style-link {
+    text-decoration: none !important;
+    color: #000;
+}
+
