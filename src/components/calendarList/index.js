@@ -55,6 +55,7 @@ export default class CalendarView extends Component {
 
         return (
             <CalendarDays 
+                additionalClass="day-block"
                 currentDay={dateUtil.isCurrentDay(day)}
                 key={day + Math.random()} 
                 year={this.state.year}
@@ -82,12 +83,14 @@ export default class CalendarView extends Component {
 
     render () {
         return (
-            <div className="text-center">
+            <div className="calendar-view">
                 <div className="title-section">
                     <p className="month-name">{monthNameMap(this.state.month) + ' ' + this.state.year}</p>
                 </div>
                 <div>{this.renderWeekdays()}</div>
-                {this.renderCalendarDayBlocks(this.state.numberOfDaysThisMonth)}
+                <div className="day-blocks">
+                    {this.renderCalendarDayBlocks(this.state.numberOfDaysThisMonth)}
+                </div>
             </div>
         );
     }

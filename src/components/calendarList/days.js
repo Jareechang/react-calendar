@@ -18,17 +18,21 @@ export default class CalendarDays extends Component {
 
         let addClassIfActive = (name) => {
             if (this.props.currentDay && isCurrentMonthAndYear()) {
-                    return name;
+                return name;
             } 
             return '';
         };
+
+        let appendAdditionalClasses = () => {
+            return `${this.props.additionalClass} ${addClassIfActive('current-day')}`;
+        }
 
         const stringifyDate = () => {
             return `${this.props.year}-${this.props.month}-${this.props.day}` ;
         };
 
         return (
-            <div className={`calendar-block ${addClassIfActive('current-day')}`}>
+            <div className={`calendar-block ${appendAdditionalClasses()}`}>
                 <Link to={`/details/${stringifyDate()}`} className="no-style-link">
                     <p className="today-text no-style-link">
                         {this.props.currentDay && isCurrentMonthAndYear() ? 'Today' : ''}
