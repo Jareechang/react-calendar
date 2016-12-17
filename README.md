@@ -2,7 +2,7 @@
 
 A simple event manager using a calendar.
 
-![alt text](https://github.com/Jareechang/react-calendar/reactCalendarImage.png "sample display")
+![alt text](https://github.com/Jareechang/react-calendar/blob/master/reactCalendarImage.png "sample display")
 
 #### Getting Started 
 
