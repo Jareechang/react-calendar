@@ -9,7 +9,7 @@ A simple event manager using a calendar.
 ```sh
 
 npm i && \
-yarn start
+./node_modules/.bin/yarn start
 ```
 
 then visit [localhost](http://localhost:3000)
